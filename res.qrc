@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>images/bg_menu.gif</file>
+        <file>images/bg_game.gif</file>
+        <file>images/player.png</file>
+        <file>images/finalBoss.png</file>
+        <file>images/powerfulEnemy.png</file>
+        <file>images/basicEnemy.png</file>
+        <file>images/playerBullet.png</file>
+        <file>images/enemyBullet.png</file>
+    </qresource>
+    <qresource prefix="/audio"/>
+</RCC>

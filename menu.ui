@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Menu</class>
+ <widget class="QWidget" name="Menu">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>426</width>
+    <height>667</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Space Impact</string>
+  </property>
+  <widget class="QLabel" name="lbl_bg">
+   <property name="geometry">
+    <rect>
+     <x>-10</x>
+     <y>-10</y>
+     <width>461</width>
+     <height>681</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="res.qrc">:/images/images/bg_menu.gif</pixmap>
+   </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>160</y>
+     <width>231</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="btn_play">
+      <property name="font">
+       <font>
+        <family>Lucida Sans Unicode</family>
+        <pointsize>35</pointsize>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#btn_play{
+background-color: transparent
+;color: rgb(218, 218, 218)
+;border: default;
+}
+#btn_play::hover{
+color: rgb(0, 255, 140)
+;border: none;
+}
+#btn_play::pressed{
+color: orange;
+border: default;
+}</string>
+      </property>
+      <property name="text">
+       <string>Jugar</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btn_controls">
+      <property name="font">
+       <font>
+        <family>Lucida Sans Unicode</family>
+        <pointsize>35</pointsize>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#btn_controls{
+background-color: transparent
+;color: rgb(217, 217, 217)
+;border: default;
+}
+#btn_controls::hover{
+color: rgb(0, 255, 140)
+;border: none;
+}
+#btn_controls::pressed{
+color: orange;
+border: default;
+}</string>
+      </property>
+      <property name="text">
+       <string>Controles</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btn_quit">
+      <property name="font">
+       <font>
+        <family>Lucida Sans Unicode</family>
+        <pointsize>35</pointsize>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#btn_quit{
+background-color: transparent
+;color: rgb(218, 218, 218)
+;border: default;
+}
+#btn_quit::hover{
+color: rgb(0, 255, 140)
+;border: none;
+}
+#btn_quit::pressed{
+color: orange;
+border: default;
+}</string>
+      </property>
+      <property name="text">
+       <string>Salir</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="lbl_title1">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>20</y>
+     <width>171</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sansation</family>
+     <pointsize>40</pointsize>
+     <italic>true</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#lbl_title1{
+color: rgb(244, 255, 26)
+;
+}</string>
+   </property>
+   <property name="text">
+    <string>SPACE</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_title2">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>80</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sansation</family>
+     <pointsize>40</pointsize>
+     <italic>true</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#lbl_title2{
+color: rgb(255, 255, 0)
+;background-color: transparent;
+
+}</string>
+   </property>
+   <property name="text">
+    <string>IMPACT</string>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -20,7 +20,7 @@ Enemy::Enemy(QObject *parent, int posy, QTimer *enemyTimer, QTimer *shootingTime
 }
 
 Enemy::~Enemy(){
-    qDebug() << "Enemigo eliminado de memoria";
+    //qDebug() << "Enemigo eliminado de memoria";
 }
 
 void Enemy::move(int velocity)

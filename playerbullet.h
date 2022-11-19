@@ -12,6 +12,7 @@ public:
     ~PlayerBullet();
 public slots:
     void move();
+    void collidesWithEnemies();
 };
 
 #endif // PLAYERBULLET_H

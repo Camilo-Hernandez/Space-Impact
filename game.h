@@ -30,6 +30,7 @@ public:
 
 public slots:
     void spawnEnemies();
+    void changeHealth(int newHealth);
 
 private:
     Ui::Game *ui;

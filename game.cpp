@@ -25,7 +25,7 @@ Game::Game(QWidget *parent) :
 
     // --- crear la escena donde añadir el jugador y los enemigos sobre el graphicsView de la ui --- //
     scene = new QGraphicsScene(this);
-    scene->setSceneRect(0,0, WIDTH, HEIGHT);
+    scene->setSceneRect(0,0, WIDTH-10, HEIGHT-10);
     ui->graphicsView->setMaximumSize(WIDTH, HEIGHT);
     ui->graphicsView->setScene(scene);
 
@@ -39,6 +39,9 @@ Game::Game(QWidget *parent) :
     // add the item to the scene
     scene->addItem(player);
 
+    // --- actualizar los indicadores de salud --- //
+    connect(player, SIGNAL(healthChanged(int)), this, SLOT(changeHealth(int)));
+
     // --- crear los enemigos periódicamente --- //
     enemies_timer = new QTimer();
     QObject::connect(enemies_timer, SIGNAL(timeout()), this, SLOT(spawnEnemies()));
@@ -48,6 +51,24 @@ Game::Game(QWidget *parent) :
 void Game::spawnEnemies(){
     Enemy *enemy = new Enemy();
     scene->addItem(enemy);
+}
+
+void Game::changeHealth(int newHealth)
+// Establecer la visibilidad de los corazones según la salud
+{
+    if (newHealth == 3){
+        ui->lbl_heart3->setVisible(true);
+    }
+    else if (newHealth == 2){
+        ui->lbl_heart2->setVisible(true);
+        ui->lbl_heart3->setVisible(false);
+    }
+    else if (newHealth == 1){
+        ui->lbl_heart2->setVisible(false);
+    }
+    else if (newHealth == 0){
+        ui->lbl_heart1->setVisible(false);
+    }
 }
 
 Game::~Game()

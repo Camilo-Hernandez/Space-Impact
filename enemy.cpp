@@ -30,7 +30,7 @@ void Enemy::move(int velocity)
     // eliminar el enemigo cuando desaparece de la escena
     if (pos().x() < 0){
         // decrementar el puntaje cuando el enemigo detecta colisión con el jugador
-        //game -> health -> decreaseHealth();
+        // TODO game -> health -> decreaseHealth();
 
         // remover el enemigo de memoria
         this->~Enemy();

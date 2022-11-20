@@ -8,6 +8,7 @@
         <file>images/basicEnemy.png</file>
         <file>images/playerBullet.png</file>
         <file>images/enemyBullet.png</file>
+        <file>images/playerHealth.png</file>
     </qresource>
     <qresource prefix="/audio"/>
 </RCC>

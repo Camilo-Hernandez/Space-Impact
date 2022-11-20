@@ -32,24 +32,6 @@ void PlayerBullet::move()
     if (pos().x()>1100){
         this->~PlayerBullet();
     }
-
-
-
-
-//    QList<QGraphicsItem *> colliding_items = collidingItems();
-//    for (int i=0, n=colliding_items.size(); i<n; ++i){
-//        if (typeid(*(colliding_items[i])) == typeid(Enemy) || typeid(*(colliding_items[i])) == typeid(EnemyBullet)){
-//            // increase the score
-//            //game->score->increaseScore();
-//            // remove them both
-//            scene()->removeItem(colliding_items[i]);
-//            scene()->removeItem(this);
-//            // delete them both
-//            delete this;
-//            delete colliding_items[i];
-//            //return;
-//        }
-//    }
 }
 
 void PlayerBullet::collidesWithEnemies(){

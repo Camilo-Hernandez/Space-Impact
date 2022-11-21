@@ -1,9 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "enemy.h"
 #include "player.h"
 #include "qgraphicsscene.h"
 #include "qlabel.h"
+#include "score.h"
 #include <QMovie>
 #include <QGraphicsView>
 
@@ -27,6 +29,7 @@ public:
     QGraphicsScene *scene;
     Player *player;
     QTimer *enemies_timer;
+    Score *score;
 
 public slots:
     void spawnEnemies();

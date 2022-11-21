@@ -2,10 +2,12 @@
 
 #include <QApplication>
 
+Menu *menu;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Menu w;
-    w.show();
+    menu = new Menu();
+    menu->show();
     return a.exec();
 }

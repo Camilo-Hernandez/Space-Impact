@@ -30,17 +30,15 @@ QMovie *Menu::getBg_gif() const
     return bg_gif;
 }
 
-
 void Menu::on_btn_play_clicked()
 {
-    game = new Game;
+    game = new Game();
     game->show();
 }
 
-
 void Menu::on_btn_controls_clicked()
 {
-
+    // TODO
 }
 
 

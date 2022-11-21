@@ -1,9 +1,11 @@
 #include "playerbullet.h"
 #include "enemy.h"
 #include "enemybullet.h"
-#include "player.h"
-#include "qgraphicsscene.h"
+#include "game.h"
+#include "menu.h"
 #include <QTimer>
+
+extern Menu *menu;
 
 PlayerBullet::PlayerBullet(QObject *parent)
     : QObject{parent}
@@ -14,14 +16,14 @@ PlayerBullet::PlayerBullet(QObject *parent)
 
     // Conectar la señal timeout() activada por la barra espaciadora y el método move()
     // Se necesita un timer para producir eventos periódicos, como el movimiento
-    QTimer *bullet_timer = new QTimer();
+    bullet_timer = new QTimer();
     connect(bullet_timer, SIGNAL(timeout()), this, SLOT(move()));
     connect(bullet_timer, SIGNAL(timeout()), this, SLOT(collidesWithEnemies()));
     bullet_timer->start(20); // milisegundos que tarda en efectuar la función move()
 }
 
 PlayerBullet::~PlayerBullet(){
-    qDebug() << "Bala eliminada de memoria";
+    //qDebug() << "Bala eliminada de memoria";
 }
 
 void PlayerBullet::move()
@@ -35,18 +37,25 @@ void PlayerBullet::move()
 }
 
 void PlayerBullet::collidesWithEnemies(){
-    // if bullet collides with enemy, destroy both
     foreach(QGraphicsItem *item, collidingItems()){
-        if(dynamic_cast<Enemy*>(item)){
-            // si colisiona con tipo Enemy, baja una vida al enemigo TODO
-            qDebug() << "Colisión con enemigo";
-            // TODO
-        }
-        else if(dynamic_cast<EnemyBullet*>(item)){
-            // si colisiona con tipo EnemyBullet, elimina los dos
-            qDebug() << "Colisión con bala enemiga";
-            this->~PlayerBullet();
+        if(dynamic_cast<EnemyBullet*>(item)){
+            // si colisiona con tipo EnemyBullet, baja la durabilidad del PlayerBullet en 1 y elimina el EnemyBullet
+            this->setDurability(getDurability()-1);
             delete item;
+            menu->game->score->changeScore(+5);
+            //qDebug() << "Durabilidad bala: " << this->getDurability();
         }
     };
+}
+
+int PlayerBullet::getDurability() const
+{
+    return durability;
+}
+
+void PlayerBullet::setDurability(int newDurability)
+{
+    durability = newDurability;
+    // destruir la bala si su vida llega a cero
+    if (durability <= 0) this->~PlayerBullet();
 }

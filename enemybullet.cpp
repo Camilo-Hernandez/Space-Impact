@@ -1,12 +1,14 @@
 #include "enemybullet.h"
+#include "player.h"
+#include "playerbullet.h"
 #include "qtimer.h"
+#include "menu.h"
 
 EnemyBullet::EnemyBullet(QObject *parent)
     : QObject{parent}
 {
     setPixmap(QPixmap(":/images/images/enemyBullet.png"));
     setScale(0.5);
-    //qDebug() << "Bala creada";
 
     // Conectar la señal timeout() activada por la barra espaciadora y el método move()
     // Se necesita un timer para producir eventos periódicos, como el movimiento
@@ -28,3 +30,4 @@ void EnemyBullet::move()
         this->~EnemyBullet();
     }
 }
+

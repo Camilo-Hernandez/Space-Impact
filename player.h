@@ -12,14 +12,14 @@ public:
     explicit Player(QObject *parent = nullptr);
     ~Player();
     void keyPressEvent(QKeyEvent *event);
-
     int getHealth() const;
     void setHealth(int newHealth);
-
 private:
     int health=3;
+
 private slots:
     void collidesWithEnemies();
+
 signals:
     void healthChanged(int newHealth);
 };

@@ -30,7 +30,7 @@ Game::Game(QWidget *parent) :
     ui->graphicsView->setScene(scene);
 
     // --- crear el jugador --- //
-    player = new Player();
+    player = new Player(this);
     //move the player to the bottom center of the view
     player->setPos(100, 150);
     // make the item focusable to be able to respond to events
@@ -39,17 +39,23 @@ Game::Game(QWidget *parent) :
     // add the item to the scene
     scene->addItem(player);
 
+    // --- agregar el score --- //
+    score = new Score();
+    scene -> addItem(score);
+    score->setPos(900, 0);
+
     // --- actualizar los indicadores de salud --- //
     connect(player, SIGNAL(healthChanged(int)), this, SLOT(changeHealth(int)));
 
     // --- crear los enemigos periódicamente --- //
     enemies_timer = new QTimer();
-    QObject::connect(enemies_timer, SIGNAL(timeout()), this, SLOT(spawnEnemies()));
-    enemies_timer->start(1500);
+    connect(enemies_timer, SIGNAL(timeout()), this, SLOT(spawnEnemies()));
+    enemies_timer->start(1000);
+
 }
 
 void Game::spawnEnemies(){
-    Enemy *enemy = new Enemy();
+    Enemy *enemy = new Enemy(this);
     scene->addItem(enemy);
 }
 

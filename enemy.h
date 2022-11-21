@@ -11,10 +11,16 @@ class Enemy : public QObject, public QGraphicsPixmapItem
 public:
     explicit Enemy(QObject *parent = nullptr, int posy = rand() % 500, QTimer *enemyTimer = new QTimer(), QTimer *shootingTimer = new QTimer());
     ~Enemy();
+    int getHealth() const;
+    void setHealth(int newHealth);
+
+private:
+    int health=2;
 
 public slots:
     void move(int velocity=8);
     void shoot();
+    void collidesWithEnemies();
 };
 
 #endif // ENEMY_H

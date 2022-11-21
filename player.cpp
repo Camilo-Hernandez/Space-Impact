@@ -1,9 +1,11 @@
 #include "player.h"
-#include "enemy.h"
 #include "enemybullet.h"
+#include "menu.h"
 #include "playerbullet.h"
 #include "qgraphicsscene.h"
 #include <QKeyEvent>
+
+extern Menu *menu;
 
 Player::Player(QObject *parent)
     : QObject{parent}
@@ -14,7 +16,7 @@ Player::Player(QObject *parent)
     // Timer para detectar colisiones con los enemigos
     QTimer *collision_timer = new QTimer();
     connect(collision_timer, SIGNAL(timeout()), this, SLOT(collidesWithEnemies()));
-    collision_timer->start(30);
+    collision_timer->start(20);
 }
 
 Player::~Player(){
@@ -53,24 +55,20 @@ void Player::setHealth(int newHealth)
 {
     if (health != newHealth) {
         health = newHealth;
-        emit healthChanged(newHealth);
-        qDebug() << "Senal emitida";
+        emit healthChanged(newHealth); // enviar señal al slot de la clase Game para actualizar los corazones de la ui
+        // destruir el jugador si su salud es 0
+        if (health <= 0) this->~Player();
     }
 }
 
 void Player::collidesWithEnemies(){
     // Si Player colisiona con tipo Enemy o EnemyBullet, baja una vida al Player
     foreach(QGraphicsItem *item, collidingItems()){
-        if(dynamic_cast<Enemy*>(item) || dynamic_cast<EnemyBullet*>(item)){ // hacer una transformación a Enemy o EnemyBullet
-            delete item; // eliminar enemigo
-
-            // actualizar los indicadores de salud
-            this->setHealth(getHealth()-1);
-            //qDebug() << "Player colisiona con enemigo";
-            qDebug() << this->getHealth();
-
-            // destruir el jugador si la vida llega a cero
-            if (getHealth() == 0) this->~Player();
+        if(dynamic_cast<EnemyBullet*>(item)){ // hacer una transformación del item a EnemyBullet
+            delete item;
+            this->setHealth(getHealth()-1); // disminuir la salud
+            // Disminuir el Score si le da una bala
+            menu->game->score->changeScore(-5);
         }
     }
 }

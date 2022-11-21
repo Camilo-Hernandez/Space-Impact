@@ -16,7 +16,8 @@ SOURCES += \
     main.cpp \
     menu.cpp \
     player.cpp \
-    playerbullet.cpp
+    playerbullet.cpp \
+    score.cpp
 
 HEADERS += \
     enemy.h \
@@ -24,7 +25,8 @@ HEADERS += \
     game.h \
     menu.h \
     player.h \
-    playerbullet.h
+    playerbullet.h \
+    score.h
 
 FORMS += \
     game.ui \

@@ -11,6 +11,7 @@ public:
     explicit EnemyBullet(QObject *parent = nullptr);
     ~EnemyBullet();
     QTimer *bullet_timer;
+
 public slots:
     void move();
 };

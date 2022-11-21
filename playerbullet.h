@@ -10,6 +10,14 @@ class PlayerBullet : public QObject, public QGraphicsPixmapItem
 public:
     explicit PlayerBullet(QObject *parent = nullptr);
     ~PlayerBullet();
+    QTimer *bullet_timer;
+
+    int getDurability() const;
+    void setDurability(int newDurability);
+
+private:
+    int durability=1;
+
 public slots:
     void move();
     void collidesWithEnemies();

@@ -110,6 +110,33 @@ background-color: transparent;
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="lbl_title">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>10</y>
+     <width>271</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sansation</family>
+     <pointsize>28</pointsize>
+     <italic>true</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#lbl_title{
+color: rgb(244, 255, 26)
+;
+}</string>
+   </property>
+   <property name="text">
+    <string>SPACE IMPACT</string>
+   </property>
+  </widget>
  </widget>
  <resources>
   <include location="res.qrc"/>

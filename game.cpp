@@ -74,6 +74,28 @@ void Game::changeHealth(int newHealth)
     }
     else if (newHealth == 0){
         ui->lbl_heart1->setVisible(false);
+        // al quedarse sin vida, muestra el mensaje de finalización
+        showEndingMessage();
+    }
+}
+
+void Game::showEndingMessage()
+{
+    qDebug() << "Ingresó a showEndingMessage";
+    this->endingMsgBox.setWindowTitle("Nivel terminado");
+    this->endingMsgBox.setIcon(QMessageBox::Information);
+    this->endingMsgBox.setStandardButtons(QMessageBox::Yes);
+    this->endingMsgBox.addButton(QMessageBox::No);
+    this->endingMsgBox.setDefaultButton(QMessageBox::Yes);
+    this->endingMsgBox.setEscapeButton(QMessageBox::Escape);
+    this->endingMsgBox.setText("Perdiste :( \n¿Volver a jugar?");
+    if (QMessageBox::Yes == this->endingMsgBox.exec()){
+        qDebug() << "Yes";
+        QCoreApplication::quit();
+    }
+    else{
+        qDebug() << "No";
+        QCoreApplication::quit();
     }
 }
 

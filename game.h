@@ -1,13 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "enemy.h"
 #include "player.h"
 #include "qgraphicsscene.h"
 #include "qlabel.h"
 #include "score.h"
 #include <QMovie>
 #include <QGraphicsView>
+#include <QMessageBox>
 
 #define WIDTH 1100
 #define HEIGHT 700
@@ -26,10 +26,12 @@ public:
     ~Game();
     QMovie *getBg_gif() const;
     void setBg_gif(QMovie *newBg_gif);
+    void showEndingMessage();
     QGraphicsScene *scene;
     Player *player;
     QTimer *enemies_timer;
     Score *score;
+    QMessageBox endingMsgBox;
 
 public slots:
     void spawnEnemies();

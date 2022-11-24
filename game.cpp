@@ -3,6 +3,9 @@
 #include "qgraphicsscene.h"
 #include "qtimer.h"
 #include "ui_game.h"
+#include "menu.h"
+
+extern Menu *menu;
 
 Game::Game(QWidget *parent) :
     QGraphicsView(parent),
@@ -18,6 +21,7 @@ Game::Game(QWidget *parent) :
     /* para poner un gif como fondo de pantalla
      * es necesario poner un graphicsView en la ui transparente
      * encima del QLabel donde se pone el gif
+     * El graphicsView es donde se pondrá la escena
      */
     setBg_gif(new QMovie(":/images/images/bg_game.gif"));
     ui->lbl_bg->setMovie(getBg_gif());
@@ -75,33 +79,17 @@ void Game::changeHealth(int newHealth)
     else if (newHealth == 0){
         ui->lbl_heart1->setVisible(false);
         // al quedarse sin vida, muestra el mensaje de finalización
-        showEndingMessage();
+        //emit finishLevel();
+        this->~Game();
+        menu->showEndingMessage();
     }
 }
 
-void Game::showEndingMessage()
-{
-    qDebug() << "Ingresó a showEndingMessage";
-    this->endingMsgBox.setWindowTitle("Nivel terminado");
-    this->endingMsgBox.setIcon(QMessageBox::Information);
-    this->endingMsgBox.setStandardButtons(QMessageBox::Yes);
-    this->endingMsgBox.addButton(QMessageBox::No);
-    this->endingMsgBox.setDefaultButton(QMessageBox::Yes);
-    this->endingMsgBox.setEscapeButton(QMessageBox::Escape);
-    this->endingMsgBox.setText("Perdiste :( \n¿Volver a jugar?");
-    if (QMessageBox::Yes == this->endingMsgBox.exec()){
-        qDebug() << "Yes";
-        QCoreApplication::quit();
-    }
-    else{
-        qDebug() << "No";
-        QCoreApplication::quit();
-    }
-}
 
 Game::~Game()
 {
     delete ui;
+    qDebug() << "Game eliminado de memoria";
 }
 
 QMovie *Game::getBg_gif() const

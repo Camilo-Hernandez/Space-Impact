@@ -20,6 +20,12 @@ Menu::~Menu()
     delete ui;
 }
 
+void Menu::startGame()
+{
+    game = new Game();
+    game->show();
+}
+
 void Menu::setBg_gif(QMovie *_bg_gif)
 {
     bg_gif = _bg_gif;
@@ -32,8 +38,7 @@ QMovie *Menu::getBg_gif() const
 
 void Menu::on_btn_play_clicked()
 {
-    game = new Game();
-    game->show();
+    startGame();
 }
 
 void Menu::on_btn_controls_clicked()
@@ -47,3 +52,22 @@ void Menu::on_btn_quit_clicked()
     close();
 }
 
+void Menu::showEndingMessage()
+{
+    this->endingMsgBox.setWindowTitle("Nivel terminado");
+    this->endingMsgBox.setIcon(QMessageBox::Information);
+    this->endingMsgBox.setStandardButtons(QMessageBox::Yes);
+    this->endingMsgBox.addButton(QMessageBox::No);
+    this->endingMsgBox.setDefaultButton(QMessageBox::Yes);
+    this->endingMsgBox.setEscapeButton(QMessageBox::Escape);
+    this->endingMsgBox.setText("Perdiste :( \n¿Volver a jugar?");
+    if (QMessageBox::Yes == this->endingMsgBox.exec()){
+        //qDebug() << "Yes";
+        game = new Game();
+        game->show();
+    }
+    else{
+        //qDebug() << "No";
+        QCoreApplication::quit();
+    }
+}

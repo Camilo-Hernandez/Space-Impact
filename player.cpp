@@ -3,6 +3,7 @@
 #include "menu.h"
 #include "playerbullet.h"
 #include "qgraphicsscene.h"
+#include "qtimer.h"
 #include <QKeyEvent>
 
 extern Menu *menu;
@@ -14,7 +15,7 @@ Player::Player(QObject *parent)
     setScale(0.35);
 
     // Timer para detectar colisiones con los enemigos
-    QTimer *collision_timer = new QTimer();
+    collision_timer = new QTimer();
     connect(collision_timer, SIGNAL(timeout()), this, SLOT(collidesWithEnemies()));
     collision_timer->start(20);
 }
@@ -24,6 +25,7 @@ Player::~Player(){
 }
 
 void Player::keyPressEvent(QKeyEvent *event)
+// Función reservada de los QObject que detecta automáticamente las teclas presionadas
 {
     // Mover la nave con las flechas dentro de los límites de la escena
     if (event->key() == Qt::Key_Left && pos().x() > 0){
@@ -40,7 +42,7 @@ void Player::keyPressEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_Space){
         // Crear una bala
-        PlayerBullet *playerbullet = new PlayerBullet();
+        PlayerBullet *playerbullet = new PlayerBullet(scene());
         playerbullet->setPos(x()+143,y()+42); // posición de la bala respecto de la esquina superior izquierda del Player
         scene()->addItem(playerbullet); // cada item tiene un puntero a la escena a la que será añadido
     }
@@ -64,7 +66,7 @@ void Player::setHealth(int newHealth)
 void Player::collidesWithEnemies(){
     // Si Player colisiona con tipo Enemy o EnemyBullet, baja una vida al Player
     foreach(QGraphicsItem *item, collidingItems()){
-        if(dynamic_cast<EnemyBullet*>(item)){ // hacer una transformación del item a EnemyBullet
+        if(dynamic_cast<EnemyBullet*>(item)){ // dynamic_cast Tratar de hacer una transformación del item a EnemyBullet. Si es exitosa, pasa el if.
             delete item;
             this->setHealth(getHealth()-1); // disminuir la salud
             // Disminuir el Score si le da una bala

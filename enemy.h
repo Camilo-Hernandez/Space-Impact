@@ -13,6 +13,7 @@ public:
     ~Enemy();
     int getHealth() const;
     void setHealth(int newHealth);
+    QTimer *collision_timer;
 
 private:
     int health=2;

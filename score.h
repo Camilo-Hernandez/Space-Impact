@@ -6,11 +6,12 @@
 class Score : public QGraphicsTextItem
 {
 public:
-    Score(QGraphicsItem *parent=0); // darle un padre por defecto de 0
+    Score(QGraphicsItem *parent = nullptr); // darle un padre por defecto de 0
     int getScore();
 private:
-    int score;
+    int score=0;
 public slots:
+    ~Score();
     void changeScore(int change);
 };
 

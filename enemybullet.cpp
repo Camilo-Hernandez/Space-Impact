@@ -1,8 +1,5 @@
 #include "enemybullet.h"
-#include "player.h"
-#include "playerbullet.h"
 #include "qtimer.h"
-#include "menu.h"
 
 EnemyBullet::EnemyBullet(QObject *parent)
     : QObject{parent}
@@ -18,7 +15,7 @@ EnemyBullet::EnemyBullet(QObject *parent)
 }
 
 EnemyBullet::~EnemyBullet(){
-    //qDebug() << "Bala enemiga eliminada de memoria";
+    qDebug() << "Bala enemiga eliminada de memoria";
 }
 
 void EnemyBullet::move()

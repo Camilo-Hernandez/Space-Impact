@@ -23,7 +23,7 @@ PlayerBullet::PlayerBullet(QObject *parent)
 }
 
 PlayerBullet::~PlayerBullet(){
-    //qDebug() << "Bala eliminada de memoria";
+    qDebug() << "Bala eliminada de memoria";
 }
 
 void PlayerBullet::move()

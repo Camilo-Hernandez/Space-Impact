@@ -31,7 +31,6 @@ public:
     Player *player;
     QTimer *enemies_timer;
     Score *score;
-    QMessageBox endingMsgBox;
 
 public slots:
     void spawnEnemies();
@@ -41,6 +40,9 @@ private:
     Ui::Game *ui;
     QMovie *bg_gif;
     QLabel *lbl_bg;
+
+signals:
+    void finishLevel();
 };
 
 #endif // GAME_H

@@ -1,5 +1,8 @@
 #include "score.h"
+#include "menu.h"
 #include "qfont.h"
+
+extern Menu *menu;
 
 Score::Score(QGraphicsItem *parent): QGraphicsTextItem(parent)
 /* QGraphicsTextItem recibe el padre de QGraphicsItem
@@ -24,4 +27,9 @@ void Score::changeScore(int change)
 int Score::getScore()
 {
     return score;
+}
+
+Score::~Score()
+{
+    qDebug() << "Score eliminado de memoria";
 }

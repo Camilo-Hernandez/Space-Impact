@@ -23,13 +23,13 @@ Enemy::Enemy(QObject *parent, int posy, QTimer *enemyTimer, QTimer *shootingTime
     shootingTimer->start(1500);
 
     // Timer para detectar colisiones con los enemigos
-    QTimer *collision_timer = new QTimer();
+    collision_timer = new QTimer();
     connect(collision_timer, SIGNAL(timeout()), this, SLOT(collidesWithEnemies()));
     collision_timer->start(20);
 }
 
 Enemy::~Enemy(){
-    //qDebug() << "Enemigo eliminado de memoria";
+    qDebug() << "Enemigo eliminado de memoria";
 }
 
 void Enemy::move(int velocity)

@@ -14,6 +14,7 @@ public:
     void keyPressEvent(QKeyEvent *event);
     int getHealth() const;
     void setHealth(int newHealth);
+    QTimer *collision_timer;
 private:
     int health=3;
 

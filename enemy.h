@@ -14,14 +14,18 @@ public:
     int getHealth() const;
     void setHealth(int newHealth);
     QTimer *collision_timer;
+    void setImage(QPixmap);
+    void setImage(int);
 
 private:
-    int health=2;
+    int health=3;
 
 public slots:
     void move(int velocity=8);
     void shoot();
-    void collidesWithEnemies();
+    void collidesWithPlayerBullets();
+signals:
+    void changeScore(int);
 };
 
 #endif // ENEMY_H

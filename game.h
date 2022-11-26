@@ -4,7 +4,6 @@
 #include "player.h"
 #include "qgraphicsscene.h"
 #include "qlabel.h"
-#include "score.h"
 #include <QMovie>
 #include <QGraphicsView>
 #include <QMessageBox>
@@ -30,16 +29,21 @@ public:
     QGraphicsScene *scene;
     Player *player;
     QTimer *enemies_timer;
-    Score *score;
+    QTimer *heartsTimer;
+    int getScore() const;
 
 public slots:
     void spawnEnemies();
+    void spawnHearts();
     void changeHealth(int newHealth);
+    void setScore(int newScore);
+    void activateBoss();
 
 private:
     Ui::Game *ui;
     QMovie *bg_gif;
     QLabel *lbl_bg;
+    int score=0;
 
 signals:
     void finishLevel();

@@ -1,5 +1,4 @@
 #include "playerbullet.h"
-#include "enemy.h"
 #include "enemybullet.h"
 #include "game.h"
 #include "menu.h"
@@ -18,12 +17,12 @@ PlayerBullet::PlayerBullet(QObject *parent)
     // Se necesita un timer para producir eventos periódicos, como el movimiento
     bullet_timer = new QTimer();
     connect(bullet_timer, SIGNAL(timeout()), this, SLOT(move()));
-    connect(bullet_timer, SIGNAL(timeout()), this, SLOT(collidesWithEnemies()));
+    connect(bullet_timer, SIGNAL(timeout()), this, SLOT(collidesWithEnemyBullets()));
     bullet_timer->start(20); // milisegundos que tarda en efectuar la función move()
 }
 
 PlayerBullet::~PlayerBullet(){
-    qDebug() << "Bala eliminada de memoria";
+    //qDebug() << "Bala eliminada de memoria";
 }
 
 void PlayerBullet::move()
@@ -36,14 +35,15 @@ void PlayerBullet::move()
     }
 }
 
-void PlayerBullet::collidesWithEnemies(){
+void PlayerBullet::collidesWithEnemyBullets(){
     foreach(QGraphicsItem *item, collidingItems()){
+        // Aquí se evalúa la colisión entre balas
         if(dynamic_cast<EnemyBullet*>(item)){
-            // si colisiona con tipo EnemyBullet, baja la durabilidad del PlayerBullet en 1 y elimina el EnemyBullet
+            // Si colisiona con tipo EnemyBullet, baja la durabilidad del PlayerBullet en 1 y elimina el EnemyBullet
+            // Pensado para balas con más durabilidad
+            emit setScore(+5); // enviar la señal de aumentar el score en 5 antes de destruir la bala
             this->setDurability(getDurability()-1);
-            delete item;
-            menu->game->score->changeScore(+5);
-            //qDebug() << "Durabilidad bala: " << this->getDurability();
+            delete item; // eliminar la bala enemiga
         }
     };
 }

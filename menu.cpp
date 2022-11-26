@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "controls.h"
 #include "ui_menu.h"
 #include <QFont>
 #include <QFontDatabase>
@@ -12,7 +13,6 @@ Menu::Menu(QWidget *parent)
     setBg_gif(new QMovie(":/images/images/bg_menu.gif"));
     ui->lbl_bg->setMovie(getBg_gif());
     getBg_gif()->start();
-
 }
 
 Menu::~Menu()
@@ -43,7 +43,8 @@ void Menu::on_btn_play_clicked()
 
 void Menu::on_btn_controls_clicked()
 {
-    // TODO
+    Controls *controls = new Controls();
+    controls->show();
 }
 
 
@@ -60,7 +61,8 @@ void Menu::showEndingMessage()
     this->endingMsgBox.addButton(QMessageBox::No);
     this->endingMsgBox.setDefaultButton(QMessageBox::Yes);
     this->endingMsgBox.setEscapeButton(QMessageBox::Escape);
-    this->endingMsgBox.setText("Perdiste :( \n¿Volver a jugar?");
+    this->endingMsgBox.setText("Perdiste :(\n Puntaje final: "
+                               + QString::number(game->getScore()) + "\n¿Volver a jugar?");
     if (QMessageBox::Yes == this->endingMsgBox.exec()){
         //qDebug() << "Yes";
         game = new Game();

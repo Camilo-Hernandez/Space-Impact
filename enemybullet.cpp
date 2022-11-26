@@ -15,7 +15,7 @@ EnemyBullet::EnemyBullet(QObject *parent)
 }
 
 EnemyBullet::~EnemyBullet(){
-    qDebug() << "Bala enemiga eliminada de memoria";
+    //qDebug() << "Bala enemiga eliminada de memoria";
 }
 
 void EnemyBullet::move()

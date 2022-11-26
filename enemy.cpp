@@ -12,7 +12,6 @@ Enemy::Enemy(QObject *parent, int posy, QTimer *enemyTimer, QTimer *shootingTime
 {
     // Crear el enemigo en una posición aleatoria en y() y 1100 en x()
     setPos(1100, posy);
-    setPixmap(QPixmap(":/images/images/basicEnemy.png"));
     setScale(0.35);
 
     // Conectar la señal timeout() activada por la barra espaciadora y el método move()
@@ -20,16 +19,16 @@ Enemy::Enemy(QObject *parent, int posy, QTimer *enemyTimer, QTimer *shootingTime
     connect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
     enemyTimer->start(40); // milisegundos que tarda en efectuar la función move()
     connect(shootingTimer, SIGNAL(timeout()), this, SLOT(shoot()));
-    shootingTimer->start(1500);
+    shootingTimer->start(1200);
 
     // Timer para detectar colisiones con los enemigos
     collision_timer = new QTimer();
-    connect(collision_timer, SIGNAL(timeout()), this, SLOT(collidesWithEnemies()));
+    connect(collision_timer, SIGNAL(timeout()), this, SLOT(collidesWithPlayerBullets()));
     collision_timer->start(20);
 }
 
 Enemy::~Enemy(){
-    qDebug() << "Enemigo eliminado de memoria";
+//    qDebug() << "Enemigo eliminado de memoria";
 }
 
 void Enemy::move(int velocity)
@@ -38,10 +37,10 @@ void Enemy::move(int velocity)
     setPos(x()-velocity, y());
     // eliminar el enemigo cuando desaparece de la escena y disminuir el puntaje
     if (pos().x() < 0){
+        // Disminuir el Score en 3
+        emit changeScore(-3);
         // remover el enemigo de memoria
         this->~Enemy();
-        // Disminuir el Score en 3
-        menu->game->score->changeScore(-3);
     }
 }
 
@@ -59,19 +58,36 @@ void Enemy::setHealth(int newHealth)
         health = newHealth;
         // destruir el enemigo si su salud es 0 y Aumentar el Score en 10
         if (health <= 0)        {
+            emit changeScore(+10);
             this->~Enemy();
-            menu->game->score->changeScore(+10);
         }
-
     }
 }
 
-void Enemy::collidesWithEnemies(){
-    // Si Player colisiona con tipo Enemy o EnemyBullet, baja una vida al Player
+void Enemy::setImage(QPixmap image)
+{
+    setPixmap(image);
+}
+
+void Enemy::setImage(int numImage)
+// Función sobrecargada
+{
+    QString image;
+    if (numImage == 1){
+        image = ":/images/images/basicEnemy.png";
+    }
+    else if (numImage == 2){
+        image = ":/images/images/finalBoss.png";
+    }
+    setPixmap(QPixmap(image));
+}
+
+void Enemy::collidesWithPlayerBullets(){
+    // Si Enemy colisiona con tipo PlayerBullet, baja la salud en 1
     foreach(QGraphicsItem *item, collidingItems()){
         if(dynamic_cast<PlayerBullet*>(item)){ // hacer una transformación del item a EnemyBullet
             delete item;
-            this->setHealth(getHealth()-1); // disminuir la salud
+            this->setHealth(getHealth()-1); // disminuir la salud del enemigo
         }
     }
 }

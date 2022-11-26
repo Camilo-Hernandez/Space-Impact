@@ -20,7 +20,10 @@ private:
 
 public slots:
     void move();
-    void collidesWithEnemies();
+    void collidesWithEnemyBullets();
+
+signals:
+    void setScore(int);
 };
 
 #endif // PLAYERBULLET_H

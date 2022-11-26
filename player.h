@@ -15,14 +15,18 @@ public:
     int getHealth() const;
     void setHealth(int newHealth);
     QTimer *collision_timer;
+
 private:
     int health=3;
 
 private slots:
     void collidesWithEnemies();
+    void sendChangedScore(int);
+    void healthChanged();
 
 signals:
     void healthChanged(int newHealth);
+    void scoreChanged(int);
 };
 
 #endif // PLAYER_H

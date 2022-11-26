@@ -1,5 +1,7 @@
 #include "game.h"
 #include "enemy.h"
+#include "enemyboss.h"
+#include "heart.h"
 #include "qgraphicsscene.h"
 #include "qtimer.h"
 #include "ui_game.h"
@@ -35,32 +37,46 @@ Game::Game(QWidget *parent) :
 
     // --- crear el jugador --- //
     player = new Player(this);
-    //move the player to the bottom center of the view
+    // mover el jugador a la posición (100, 150)
     player->setPos(100, 150);
-    // make the item focusable to be able to respond to events
+    // hacer el jugador enfocable para que se pueda mover
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
-    // add the item to the scene
+    // añadir el jugador a la escena
     scene->addItem(player);
-
-    // --- agregar el score --- //
-    score = new Score();
-    scene -> addItem(score);
-    score->setPos(900, 0);
 
     // --- actualizar los indicadores de salud --- //
     connect(player, SIGNAL(healthChanged(int)), this, SLOT(changeHealth(int)));
 
+    // --- actualizar el puntaje --- //
+    connect(player, SIGNAL(scoreChanged(int)), this, SLOT(setScore(int)));
+
     // --- crear los enemigos periódicamente --- //
     enemies_timer = new QTimer();
     connect(enemies_timer, SIGNAL(timeout()), this, SLOT(spawnEnemies()));
-    enemies_timer->start(1000);
+    enemies_timer->start(1500);
 
+    // --- crear los corazones periódicamente --- //
+    heartsTimer = new QTimer();
+    connect(heartsTimer, SIGNAL(timeout()), this, SLOT(spawnHearts()));
+    heartsTimer->start(5000);
+
+    // --- crear el Jefe Final --- //
+    QTimer::singleShot(30000, this, SLOT(activateBoss()));
 }
 
 void Game::spawnEnemies(){
     Enemy *enemy = new Enemy(this);
     scene->addItem(enemy);
+    enemy->setImage(QPixmap(":/images/images/basicEnemy.png"));
+    connect(enemy, SIGNAL(changeScore(int)), this, SLOT(setScore(int)));
+}
+
+void Game::spawnHearts()
+{
+    Heart *heart = new Heart(this);
+    scene->addItem(heart);
+    connect(heart, SIGNAL(increaseHealth()), player, SLOT(healthChanged()));
 }
 
 void Game::changeHealth(int newHealth)
@@ -85,6 +101,25 @@ void Game::changeHealth(int newHealth)
     }
 }
 
+int Game::getScore() const
+{
+    return score;
+}
+
+void Game::setScore(int scoreDiff)
+{
+    score += scoreDiff;
+    ui->lbl_score->setText(QString::number(score));
+}
+
+void Game::activateBoss()
+{
+    enemies_timer->stop();
+    heartsTimer->stop();
+    EnemyBoss *enemyBoss = new EnemyBoss();
+    scene->addItem(enemyBoss);
+    connect(enemyBoss, SIGNAL(changeScore(int)), this, SLOT(setScore(int)));
+}
 
 Game::~Game()
 {

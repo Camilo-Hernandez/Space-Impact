@@ -17,8 +17,8 @@ public:
     Menu(QWidget *parent = nullptr);
     ~Menu();
     // se declara público para que esté diponible por cualquier otra clase
-    void startGame();
     Game *game;
+    void startGame();
     void setBg_gif(QMovie *newBg_gif);
     QMovie *getBg_gif() const;
     void showEndingMessage();

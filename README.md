@@ -1,7 +1,7 @@
 # Space-Impact
 Juego de Space Impact desarrollado en lenguaje C++ con Qt 8.0.2 (basado en Qt 6.3.2).
 
-Es un juego de naves espaciales en 2D.
+Es un juego básico de naves espaciales en 2D, de un sólo nivel.
 
 # Menu
 

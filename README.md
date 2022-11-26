@@ -5,11 +5,12 @@ Es un juego de naves espaciales en 2D.
 
 # Menu
 
-![image](https://user-images.githubusercontent.com/36543483/204105234-1756167c-8697-4fd1-9bcf-f79d172cd3cd.png)
+![image](https://user-images.githubusercontent.com/36543483/204105461-a64e913a-86ad-4400-9bb2-d4dc75070db2.png)
 
 # Controles
 
-![image](https://user-images.githubusercontent.com/36543483/204105250-c729b288-34b3-474c-ade9-6a38760253de.png)
+![image](https://user-images.githubusercontent.com/36543483/204105459-217bccab-5eee-4459-b40d-19093976b91e.png)
+
 
 # Juego
 
